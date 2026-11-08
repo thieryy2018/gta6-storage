@@ -1,10 +1,10 @@
-<!DOCTYPE html>
+﻿<!DOCTYPE html>
 <html lang="en" data-theme="">
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
   <title>GTA 6 Storage Calculator: Will It Fit on Your Console? - GTA6Storage.co.uk</title>
-  <meta name="description" content="Interactive GTA 6 storage calculator. Pick your console, tick the games you have installed, and see instantly whether GTA 6 will fit — with a live visual storage bar.">
+  <meta name="description" content="Interactive GTA 6 storage calculator. Pick your console, tick the games you have installed, and see instantly whether GTA 6 will fit, with a live visual storage bar.">
   <meta name="keywords" content="GTA 6 storage calculator, will GTA 6 fit PS5, Xbox Series S storage check, GTA 6 210GB, PS5 storage space">
   <link rel="canonical" href="https://gta6storage.co.uk/pages/storage-calculator.html">
   <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -379,11 +379,11 @@
           GTA 6
         </div>
         <div class="stat-pill">
-          <strong id="stat-total">— GB</strong>
+          <strong id="stat-total">? GB</strong>
           Console total
         </div>
         <div class="stat-pill">
-          <strong id="stat-free" style="color:var(--cyan);">— GB</strong>
+          <strong id="stat-free" style="color:var(--cyan);">? GB</strong>
           Free after GTA 6
         </div>
       </div>
@@ -397,7 +397,7 @@
       <div class="bar-labels">
         <div class="bar-label"><div class="dot" style="background:#a855f7;"></div> <span>Your games: <strong id="lbl-used">0 GB</strong></span></div>
         <div class="bar-label"><div class="dot" style="background:var(--accent);"></div> <span>GTA 6: <strong>210 GB</strong></span></div>
-        <div class="bar-label"><div class="dot" style="background:var(--bg3); border:1px solid var(--border);"></div> <span>Free space: <strong id="lbl-free">— GB</strong></span></div>
+        <div class="bar-label"><div class="dot" style="background:var(--bg3); border:1px solid var(--border);"></div> <span>Free space: <strong id="lbl-free">? GB</strong></span></div>
       </div>
 
       <!-- Result panel -->
@@ -600,10 +600,10 @@
       document.getElementById('stat-used').textContent = fmt(usedGB);
 
       if (!selectedConsole) {
-        document.getElementById('stat-total').textContent = '— GB';
-        document.getElementById('stat-free').textContent  = '— GB';
+        document.getElementById('stat-total').textContent = '? GB';
+        document.getElementById('stat-free').textContent  = '? GB';
         document.getElementById('lbl-used').textContent   = fmt(usedGB);
-        document.getElementById('lbl-free').textContent   = '— GB';
+        document.getElementById('lbl-free').textContent   = '? GB';
         setBar(0, 0, 100);
         setResult('neutral', '📊', 'Select a console to get started',
           'Pick your console above, then tick any games you already have installed.');
@@ -630,7 +630,7 @@
           `Your ${count > 0 ? count + ' installed games use ' + fmt(usedGB) + '. After GTA 6 you will have ' : 'empty console means you will have '}${fmt(freeAfterGTA)} free. You are all set for November 19.`);
       } else if (freeAfterGTA >= 0) {
         setResult('tight', '⚠️',
-          `GTA 6 fits — but it's tight`,
+          `GTA 6 fits, but it's tight`,
           `You will only have ${fmt(freeAfterGTA)} free after installing GTA 6. Day-one patches and updates could use this up. Consider freeing more space or upgrading.`);
       } else {
         const shortBy = Math.abs(freeAfterGTA);
