@@ -1,4 +1,14 @@
 {
   "cleanUrls": true,
-  "trailingSlash": false
+  "trailingSlash": false,
+  "redirects": [
+    { "source": "/index.html", "destination": "/", "permanent": true },
+    { "source": "/pages/faq.html", "destination": "/pages/gta6-storage-faqs", "permanent": true },
+    { "source": "/pages/install-guide.html", "destination": "/pages/gta6-ps5-install-guide", "permanent": true },
+    { "source": "/pages/ssds.html", "destination": "/pages/ssds-for-gta6", "permanent": true },
+    { "source": "/pages/ps5-storage.html", "destination": "/pages/gta6-ps5-storage", "permanent": true },
+    { "source": "/pages/xbox-storage.html", "destination": "/pages/gta6-xbox-storage", "permanent": true },
+    { "source": "/pages/pc-storage.html", "destination": "/pages/gta6-pc-storage", "permanent": true },
+    { "source": "/pages/storage-calculator.html", "destination": "/pages/gta6-storage-calculator", "permanent": true }
+  ]
 }

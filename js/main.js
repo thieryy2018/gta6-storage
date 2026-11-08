@@ -51,6 +51,8 @@ function updateCountdown() {
 }
 updateCountdown();
 setInterval(updateCountdown, 1000);
+// Safety net: re-run once DOM is fully ready in case element wasn't available yet
+window.addEventListener('DOMContentLoaded', updateCountdown);
 
 // --- Affiliate link click tracking (console log only — swap for GA/analytics) ---
 document.querySelectorAll('.btn-buy').forEach(btn => {
