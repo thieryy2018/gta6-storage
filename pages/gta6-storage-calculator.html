@@ -5,9 +5,14 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
   <title>GTA 6 Storage Calculator: Will It Fit on Your Console? - GTA6Storage.co.uk</title>
   <meta name="description" content="Interactive GTA 6 storage calculator. Pick your console, tick the games you have installed, and see instantly whether GTA 6 will fit, with a live visual storage bar.">
+  <meta property="og:url" content="https://gta6storage.co.uk/pages/gta6-storage-calculator">
+  <meta property="og:image" content="https://gta6storage.co.uk/images/og-image.png">
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="GTA 6 Storage Calculator">
+  <meta name="twitter:description" content="Check if GTA 6 fits on your PS5 or Xbox. Enter your console and installed games to see exactly how much space you have left.">
+  <meta name="twitter:image" content="https://gta6storage.co.uk/images/og-image.png">
     <meta name="google-site-verification" content="z5ShQyMlg_ErALyIhiDqBOerC1-rnmrFd_16gKJb3S4" />
-  <meta name="keywords" content="GTA 6 storage calculator, will GTA 6 fit PS5, Xbox Series S storage check, GTA 6 210GB, PS5 storage space">
-  <link rel="canonical" href="https://gta6storage.co.uk/pages/gta6-storage-calculator.html">
+  <link rel="canonical" href="https://gta6storage.co.uk/pages/gta6-storage-calculator">
   <link rel="icon" href="/favicon.svg" type="image/svg+xml">
   <link rel="icon" href="/favicon.svg">
   <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -296,15 +301,16 @@
 
   <header class="site-header">
     <div class="container header-inner">
-      <a href="../index.html" class="logo"><img src="../img/logo.svg" alt="GTA6Storage.co.uk" height="34" style="display:block;"></a>
+      <a href="/" class="logo"><img src="../img/logo.svg" alt="GTA6Storage.co.uk" height="34" style="display:block;"></a>
       <button class="nav-toggle" id="nav-toggle" aria-label="Toggle navigation" aria-expanded="false">&#9776;</button>
-      <nav class="site-nav" id="site-nav">
-        <a href="ssds-for-gta6.html">Best SSDs</a>
-        <a href="../index.html#checker">Console Check</a>
-        <a href="gta6-storage-calculator.html" class="active">Calculator</a>
-        <a href="gta6-ps5-install-guide.html">Install Guide</a>
-        <a href="gta6-storage-faqs.html">FAQ</a>
-        <a href="about.html">About</a>
+            <nav class="site-nav" id="site-nav">
+        <a href="ssds-for-gta6">Best SSDs</a>
+        <a href="/#checker">Console Check</a>
+        <a href="gta6-storage-calculator">Calculator</a>
+        <a href="gta6-ps5-install-guide">Install Guide</a>
+        <a href="gta6-storage-faqs">FAQ</a>
+        <a href="gta6-accessories">Accessories</a>
+        <a href="about">About</a>
       </nav>
     </div>
   </header>
@@ -419,14 +425,15 @@
   <footer class="site-footer">
     <div class="container footer-inner">
       <div class="footer-logo">GTA6<span>Storage</span>.co.uk</div>
-      <div class="footer-links">
-        <a href="ssds-for-gta6.html">Best SSDs</a>
-        <a href="../index.html#checker">Console Check</a>
-        <a href="gta6-ps5-storage.html">PS5 Guide</a>
-        <a href="gta6-xbox-storage.html">Xbox Guide</a>
-        <a href="gta6-ps5-install-guide.html">Install Guide</a>
-        <a href="gta6-storage-faqs.html">FAQ</a>
-        <a href="about.html">About</a>
+            <div class="footer-links">
+        <a href="ssds-for-gta6">Best SSDs</a>
+        <a href="/#checker">Console Check</a>
+        <a href="gta6-ps5-storage">PS5 Guide</a>
+        <a href="gta6-xbox-storage">Xbox Guide</a>
+        <a href="gta6-ps5-install-guide">Install Guide</a>
+        <a href="gta6-storage-faqs">FAQ</a>
+        <a href="gta6-accessories">Accessories</a>
+        <a href="about">About</a>
       </div>
       <div class="footer-disclaimer">
         GTA6Storage.co.uk is an independent website not affiliated with or endorsed by Rockstar Games, Take-Two Interactive, Sony, or Microsoft.
@@ -658,7 +665,7 @@
 
       const action = document.getElementById('result-action');
       if (type === 'no-fit' || type === 'tight') {
-        action.innerHTML = `<a href="../index.html#ssds" class="btn btn-primary btn-sm" style="white-space:nowrap;">Fix it: View SSDs ↗</a>`;
+        action.innerHTML = `<a href="/#ssds" class="btn btn-primary btn-sm" style="white-space:nowrap;">Fix it: View SSDs ↗</a>`;
       } else {
         action.innerHTML = '';
       }

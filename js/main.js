@@ -35,18 +35,18 @@ if (sections.length && navLinks.length) {
   sections.forEach(s => observer.observe(s));
 }
 
-// --- Countdown timer (if element exists) ---
+// --- Countdown timer ---
 function updateCountdown() {
   const el = document.getElementById('countdown');
   if (!el) return;
-  const launch = new Date('2026-11-19T00:00:00Z');
-  const now    = new Date();
-  const diff   = launch - now;
+  // Midnight 19 Nov 2026 Europe/London (GMT in November = UTC+0)
+  const launch = new Date('2026-11-19T00:00:00+00:00');
+  const diff   = launch - Date.now();
   if (diff <= 0) { el.textContent = 'OUT NOW'; return; }
   const d = Math.floor(diff / 86400000);
   const h = Math.floor((diff % 86400000) / 3600000);
-  const m = Math.floor((diff % 3600000) / 60000);
-  const s = Math.floor((diff % 60000) / 1000);
+  const m = Math.floor((diff % 3600000)  / 60000);
+  const s = Math.floor((diff % 60000)    / 1000);
   el.textContent = `${d}d ${h}h ${m}m ${s}s`;
 }
 updateCountdown();
