@@ -1,0 +1,668 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+  <title>GTA 6 Storage Calculator: Will It Fit on Your Console? - GTA6Storage.co.uk</title>
+  <meta name="description" content="Interactive GTA 6 storage calculator. Pick your console, tick the games you have installed, and see instantly whether GTA 6 will fit — with a live visual storage bar.">
+  <meta name="keywords" content="GTA 6 storage calculator, will GTA 6 fit PS5, Xbox Series S storage check, GTA 6 210GB, PS5 storage space">
+  <link rel="canonical" href="https://gta6storage.co.uk/pages/storage-calculator.html">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Barlow+Condensed:wght@700;900&family=Inter:wght@400;500;600&display=swap">
+  <link rel="stylesheet" href="../css/styles.css">
+  <style>
+    /* ---- Console picker ---- */
+    .console-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+      gap: 12px;
+      margin-bottom: 36px;
+    }
+    .console-btn {
+      background: var(--bg2);
+      border: 2px solid var(--border);
+      border-radius: 12px;
+      padding: 18px 16px;
+      cursor: pointer;
+      text-align: left;
+      transition: border-color 0.15s, background 0.15s, transform 0.1s;
+      display: flex;
+      flex-direction: column;
+      gap: 4px;
+    }
+    .console-btn:hover { border-color: var(--accent); transform: translateY(-1px); }
+    .console-btn.selected {
+      border-color: var(--accent);
+      background: rgba(255, 45, 120, 0.08);
+      box-shadow: 0 0 0 1px var(--accent);
+    }
+    .console-btn .console-name {
+      font-family: 'Barlow Condensed', sans-serif;
+      font-weight: 900;
+      font-size: 1.15rem;
+      color: var(--fg);
+    }
+    .console-btn .console-storage {
+      font-size: 0.8rem;
+      color: var(--fg2);
+    }
+    .console-btn .console-icon {
+      font-size: 1.5rem;
+      margin-bottom: 4px;
+    }
+
+    /* ---- Storage bar ---- */
+    .bar-wrap {
+      background: var(--bg3);
+      border-radius: 8px;
+      overflow: hidden;
+      height: 28px;
+      display: flex;
+      position: relative;
+      margin-bottom: 10px;
+    }
+    .bar-seg {
+      height: 100%;
+      transition: width 0.3s ease;
+      min-width: 0;
+    }
+    .bar-seg.seg-used  { background: #a855f7; }
+    .bar-seg.seg-gta   { background: var(--accent); }
+    .bar-seg.seg-free  { background: var(--bg3); }
+    .bar-seg.seg-over  { background: var(--danger); }
+    .bar-overflow {
+      position: absolute; right: 0; top: 0; bottom: 0;
+      background: repeating-linear-gradient(
+        45deg,
+        rgba(255,107,53,0.6) 0px,
+        rgba(255,107,53,0.6) 4px,
+        transparent 4px,
+        transparent 8px
+      );
+    }
+    .bar-labels {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 12px;
+      margin-bottom: 24px;
+    }
+    .bar-label {
+      display: flex;
+      align-items: center;
+      gap: 6px;
+      font-size: 0.8rem;
+      color: var(--fg2);
+    }
+    .bar-label .dot {
+      width: 10px; height: 10px;
+      border-radius: 3px;
+      flex-shrink: 0;
+    }
+    .bar-label strong { color: var(--fg); }
+
+    /* ---- Stats row ---- */
+    .stats-row {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 12px;
+      margin-bottom: 24px;
+    }
+    .stat-pill {
+      background: var(--bg2);
+      border: 1px solid var(--border);
+      border-radius: 8px;
+      padding: 10px 16px;
+      font-size: 0.85rem;
+      color: var(--fg2);
+      flex: 1;
+      min-width: 130px;
+    }
+    .stat-pill strong {
+      display: block;
+      font-family: 'Barlow Condensed', sans-serif;
+      font-size: 1.5rem;
+      font-weight: 900;
+      color: var(--fg);
+      line-height: 1;
+      margin-bottom: 2px;
+    }
+
+    /* ---- Result panel ---- */
+    .result-panel {
+      border-radius: 12px;
+      padding: 22px 24px;
+      margin-bottom: 36px;
+      display: flex;
+      align-items: flex-start;
+      gap: 16px;
+      flex-wrap: wrap;
+    }
+    .result-panel.fits {
+      background: rgba(0, 229, 195, 0.08);
+      border: 1px solid rgba(0, 229, 195, 0.3);
+    }
+    .result-panel.tight {
+      background: rgba(255, 193, 7, 0.08);
+      border: 1px solid rgba(255, 193, 7, 0.3);
+    }
+    .result-panel.no-fit {
+      background: rgba(255, 107, 53, 0.08);
+      border: 1px solid rgba(255, 107, 53, 0.3);
+    }
+    .result-icon { font-size: 2rem; flex-shrink: 0; line-height: 1; }
+    .result-text { flex: 1; min-width: 200px; }
+    .result-text h3 {
+      font-family: 'Barlow Condensed', sans-serif;
+      font-weight: 900;
+      font-size: 1.3rem;
+      margin-bottom: 4px;
+    }
+    .result-text p {
+      font-size: 0.9rem;
+      color: var(--fg2);
+      line-height: 1.6;
+      margin: 0;
+    }
+
+    /* ---- Games list ---- */
+    .games-section { margin-bottom: 32px; }
+    .games-group-title {
+      font-size: 0.72rem;
+      font-weight: 700;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      color: var(--accent);
+      margin-bottom: 10px;
+      margin-top: 24px;
+      padding-bottom: 6px;
+      border-bottom: 1px solid var(--border);
+    }
+    .games-group-title:first-child { margin-top: 0; }
+    .game-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
+      gap: 6px;
+    }
+    .game-item {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      padding: 10px 12px;
+      border-radius: 8px;
+      border: 1px solid transparent;
+      cursor: pointer;
+      transition: background 0.1s, border-color 0.1s;
+      user-select: none;
+    }
+    .game-item:hover { background: var(--bg2); border-color: var(--border); }
+    .game-item.checked { background: rgba(255,45,120,0.07); border-color: rgba(255,45,120,0.2); }
+    .game-item.dimmed { opacity: 0.35; pointer-events: none; }
+    .game-item input[type="checkbox"] { display: none; }
+    .game-checkbox {
+      width: 18px; height: 18px;
+      border-radius: 4px;
+      border: 2px solid var(--border);
+      background: var(--bg3);
+      flex-shrink: 0;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      transition: background 0.1s, border-color 0.1s;
+      font-size: 0.7rem;
+      color: #fff;
+    }
+    .game-item.checked .game-checkbox {
+      background: var(--accent);
+      border-color: var(--accent);
+    }
+    .game-info { flex: 1; min-width: 0; }
+    .game-name {
+      font-size: 0.88rem;
+      font-weight: 500;
+      color: var(--fg);
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
+    }
+    .game-meta {
+      font-size: 0.75rem;
+      color: var(--fg2);
+      display: flex;
+      gap: 6px;
+      align-items: center;
+    }
+    .game-size { font-weight: 600; color: var(--fg); }
+    .platform-tag {
+      font-size: 0.65rem;
+      font-weight: 700;
+      letter-spacing: 0.06em;
+      padding: 1px 5px;
+      border-radius: 3px;
+      text-transform: uppercase;
+    }
+    .platform-tag.ps5-tag  { background: rgba(0,112,243,0.15); color: #60a5fa; }
+    .platform-tag.xbox-tag { background: rgba(16,185,129,0.12); color: #34d399; }
+    .games-controls {
+      display: flex;
+      gap: 8px;
+      margin-bottom: 16px;
+      flex-wrap: wrap;
+    }
+    .games-controls button {
+      background: var(--bg2);
+      border: 1px solid var(--border);
+      color: var(--fg2);
+      font-size: 0.8rem;
+      font-weight: 600;
+      padding: 6px 14px;
+      border-radius: 6px;
+      cursor: pointer;
+      transition: color 0.1s, border-color 0.1s;
+    }
+    .games-controls button:hover { color: var(--accent); border-color: var(--accent); }
+
+    /* ---- Step labels ---- */
+    .calc-step {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      margin-bottom: 14px;
+    }
+    .step-badge {
+      width: 28px; height: 28px;
+      background: var(--accent);
+      color: #fff;
+      font-family: 'Barlow Condensed', sans-serif;
+      font-weight: 900;
+      font-size: 1rem;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      flex-shrink: 0;
+    }
+    .calc-step h2 {
+      font-family: 'Barlow Condensed', sans-serif;
+      font-weight: 900;
+      font-size: 1.4rem;
+      margin: 0;
+    }
+  </style>
+</head>
+<body>
+
+  <header class="site-header">
+    <div class="container header-inner">
+      <a href="../index.html" class="logo">GTA6<span>Storage</span>.co.uk <span class="badge-launch">NOV 19</span></a>
+      <button class="nav-toggle" id="nav-toggle" aria-label="Toggle navigation" aria-expanded="false">&#9776;</button>
+      <nav class="site-nav" id="site-nav">
+        <a href="ssds.html">Best SSDs</a>
+        <a href="../index.html#checker">Console Check</a>
+        <a href="storage-calculator.html" class="active">Calculator</a>
+        <a href="install-guide.html">Install Guide</a>
+        <a href="faq.html">FAQ</a>
+        <a href="about.html">About</a>
+      </nav>
+    </div>
+  </header>
+
+  <!-- HERO -->
+  <div style="background:linear-gradient(135deg,#0a0812 0%,#1a0d2e 50%,#0d0a1e 100%); border-bottom:1px solid var(--border); padding-block:48px 40px;">
+    <div class="container">
+      <p class="section-eyebrow">Interactive Tool</p>
+      <h1 style="font-family:'Barlow Condensed',sans-serif; font-weight:900; font-size:clamp(2rem,5vw,3.4rem); line-height:1.05; margin-bottom:12px;">GTA 6 Storage Calculator</h1>
+      <p style="color:var(--fg2); font-size:1.05rem; max-width:580px; line-height:1.7; margin:0;">Pick your console, tick the games you have installed, and see live whether GTA 6's 210GB will fit alongside them.</p>
+    </div>
+  </div>
+
+  <section class="section">
+    <div class="container" style="max-width:960px;">
+
+      <!-- STEP 1: CONSOLE -->
+      <div class="calc-step">
+        <div class="step-badge">1</div>
+        <h2>Pick your console</h2>
+      </div>
+      <div class="console-grid" id="console-grid">
+        <button class="console-btn" data-console="ps5std" data-capacity="667" onclick="selectConsole(this)">
+          <span class="console-icon">🎮</span>
+          <span class="console-name">PS5 Standard</span>
+          <span class="console-storage">667 GB usable</span>
+        </button>
+        <button class="console-btn" data-console="ps5slim" data-capacity="667" onclick="selectConsole(this)">
+          <span class="console-icon">🎮</span>
+          <span class="console-name">PS5 Slim</span>
+          <span class="console-storage">667 GB usable</span>
+        </button>
+        <button class="console-btn" data-console="xbx" data-capacity="802" onclick="selectConsole(this)">
+          <span class="console-icon">🟩</span>
+          <span class="console-name">Xbox Series X</span>
+          <span class="console-storage">802 GB usable</span>
+        </button>
+        <button class="console-btn" data-console="xbs" data-capacity="364" onclick="selectConsole(this)">
+          <span class="console-icon">🟩</span>
+          <span class="console-name">Xbox Series S</span>
+          <span class="console-storage">364 GB usable</span>
+        </button>
+      </div>
+
+      <!-- STEP 2: GAMES -->
+      <div class="calc-step">
+        <div class="step-badge">2</div>
+        <h2>Tick your installed games</h2>
+      </div>
+
+      <div class="games-controls">
+        <button onclick="selectAll()">Select all</button>
+        <button onclick="clearAll()">Clear all</button>
+        <span id="selected-count" style="font-size:0.82rem; color:var(--fg2); align-self:center;">0 games selected</span>
+      </div>
+
+      <div class="games-section" id="games-list">
+        <!-- Injected by JS -->
+      </div>
+
+      <!-- STEP 3: RESULT -->
+      <div class="calc-step" style="margin-top:8px;">
+        <div class="step-badge">3</div>
+        <h2>Your storage breakdown</h2>
+      </div>
+
+      <!-- Stats -->
+      <div class="stats-row" id="stats-row">
+        <div class="stat-pill">
+          <strong id="stat-used">0 GB</strong>
+          Your games
+        </div>
+        <div class="stat-pill">
+          <strong style="color:var(--accent);">210 GB</strong>
+          GTA 6
+        </div>
+        <div class="stat-pill">
+          <strong id="stat-total">— GB</strong>
+          Console total
+        </div>
+        <div class="stat-pill">
+          <strong id="stat-free" style="color:var(--cyan);">— GB</strong>
+          Free after GTA 6
+        </div>
+      </div>
+
+      <!-- Bar -->
+      <div class="bar-wrap" id="storage-bar">
+        <div class="bar-seg seg-used"  id="bar-used"  style="width:0%"></div>
+        <div class="bar-seg seg-gta"   id="bar-gta"   style="width:0%"></div>
+        <div class="bar-seg seg-free"  id="bar-free"  style="width:100%"></div>
+      </div>
+      <div class="bar-labels">
+        <div class="bar-label"><div class="dot" style="background:#a855f7;"></div> <span>Your games: <strong id="lbl-used">0 GB</strong></span></div>
+        <div class="bar-label"><div class="dot" style="background:var(--accent);"></div> <span>GTA 6: <strong>210 GB</strong></span></div>
+        <div class="bar-label"><div class="dot" style="background:var(--bg3); border:1px solid var(--border);"></div> <span>Free space: <strong id="lbl-free">— GB</strong></span></div>
+      </div>
+
+      <!-- Result panel -->
+      <div class="result-panel fits" id="result-panel">
+        <div class="result-icon" id="result-icon">📊</div>
+        <div class="result-text">
+          <h3 id="result-title">Select a console to get started</h3>
+          <p id="result-body">Pick your console above, then tick any games you already have installed.</p>
+        </div>
+        <div id="result-action"></div>
+      </div>
+
+    </div>
+  </section>
+
+  <footer class="site-footer">
+    <div class="container footer-inner">
+      <div class="footer-logo">GTA6<span>Storage</span>.co.uk</div>
+      <div class="footer-links">
+        <a href="ssds.html">Best SSDs</a>
+        <a href="../index.html#checker">Console Check</a>
+        <a href="ps5-storage.html">PS5 Guide</a>
+        <a href="xbox-storage.html">Xbox Guide</a>
+        <a href="install-guide.html">Install Guide</a>
+        <a href="faq.html">FAQ</a>
+        <a href="about.html">About</a>
+      </div>
+      <div class="footer-disclaimer">
+        GTA6Storage.co.uk is an independent website not affiliated with or endorsed by Rockstar Games, Take-Two Interactive, Sony, or Microsoft.
+        Grand Theft Auto and GTA are trademarks of Take-Two Interactive Software, Inc.
+        Usable storage figures are approximate real-world values. Game install sizes sourced from publisher data and may vary with updates.
+        This site contains Amazon affiliate links. We may earn a commission when you buy through them, at no extra cost to you.
+      </div>
+    </div>
+  </footer>
+
+  <script src="../js/main.js"></script>
+  <script>
+    const GTA6_SIZE = 210;
+
+    const GAMES = [
+      // Cross-platform
+      { name: "Call of Duty: Black Ops 6",         size: 102, platform: "both" },
+      { name: "Call of Duty: Modern Warfare III",   size: 115, platform: "both" },
+      { name: "EA Sports FC 25",                    size: 52,  platform: "both" },
+      { name: "EA Sports FC 24",                    size: 50,  platform: "both" },
+      { name: "Cyberpunk 2077",                     size: 65,  platform: "both" },
+      { name: "Elden Ring",                         size: 44,  platform: "both" },
+      { name: "Hogwarts Legacy",                    size: 76,  platform: "both" },
+      { name: "Red Dead Redemption 2",              size: 105, platform: "both" },
+      { name: "Fortnite",                           size: 35,  platform: "both" },
+      { name: "Destiny 2",                          size: 105, platform: "both" },
+      { name: "Mortal Kombat 1",                    size: 50,  platform: "both" },
+      { name: "Assassin's Creed Mirage",            size: 40,  platform: "both" },
+      { name: "Alan Wake 2",                        size: 90,  platform: "both" },
+      { name: "Baldur's Gate 3",                    size: 122, platform: "both" },
+      { name: "NBA 2K25",                           size: 100, platform: "both" },
+      { name: "Diablo IV",                          size: 90,  platform: "both" },
+      { name: "The Crew Motorfest",                 size: 65,  platform: "both" },
+      // PS5-focused
+      { name: "Marvel's Spider-Man 2",              size: 59,  platform: "ps5"  },
+      { name: "God of War: Ragnarok",               size: 90,  platform: "ps5"  },
+      { name: "The Last of Us Part I",              size: 79,  platform: "ps5"  },
+      { name: "Horizon Forbidden West",             size: 86,  platform: "ps5"  },
+      { name: "Gran Turismo 7",                     size: 109, platform: "ps5"  },
+      { name: "Ratchet & Clank: Rift Apart",        size: 42,  platform: "ps5"  },
+      { name: "Returnal",                           size: 54,  platform: "ps5"  },
+      // Xbox-focused
+      { name: "Starfield",                          size: 139, platform: "xbox" },
+      { name: "Forza Horizon 5",                    size: 116, platform: "xbox" },
+      { name: "Halo Infinite",                      size: 97,  platform: "xbox" },
+      { name: "Forza Motorsport (2023)",             size: 86,  platform: "xbox" },
+      { name: "Sea of Thieves",                     size: 40,  platform: "xbox" },
+      { name: "Gears 5",                            size: 43,  platform: "xbox" },
+    ];
+
+    let selectedConsole = null;
+    let capacity = 0;
+    const checked = new Set();
+
+    function selectConsole(btn) {
+      document.querySelectorAll('.console-btn').forEach(b => b.classList.remove('selected'));
+      btn.classList.add('selected');
+      selectedConsole = btn.dataset.console;
+      capacity = parseInt(btn.dataset.capacity, 10);
+      updateDimming();
+      update();
+    }
+
+    function isCompatible(platform) {
+      if (!selectedConsole) return true;
+      if (platform === 'both') return true;
+      if (platform === 'ps5')  return selectedConsole.startsWith('ps5');
+      if (platform === 'xbox') return selectedConsole.startsWith('xb');
+      return true;
+    }
+
+    function buildGamesList() {
+      const container = document.getElementById('games-list');
+      const groups = [
+        { label: 'Available on PS5 and Xbox',   filter: g => g.platform === 'both' },
+        { label: 'PS5 exclusive / PS5 focus',    filter: g => g.platform === 'ps5'  },
+        { label: 'Xbox exclusive / Xbox focus',  filter: g => g.platform === 'xbox' },
+      ];
+      container.innerHTML = groups.map(group => {
+        const games = GAMES.filter(group.filter);
+        const rows = games.map((game, _) => {
+          const id = `game-${GAMES.indexOf(game)}`;
+          const tagHtml = game.platform === 'ps5'
+            ? '<span class="platform-tag ps5-tag">PS5</span>'
+            : game.platform === 'xbox'
+            ? '<span class="platform-tag xbox-tag">Xbox</span>'
+            : '';
+          return `
+            <label class="game-item" id="item-${GAMES.indexOf(game)}" onclick="toggleGame(${GAMES.indexOf(game)}, event)">
+              <input type="checkbox" id="${id}">
+              <div class="game-checkbox" id="cb-${GAMES.indexOf(game)}"></div>
+              <div class="game-info">
+                <div class="game-name">${game.name}</div>
+                <div class="game-meta">
+                  <span class="game-size">${game.size} GB</span>
+                  ${tagHtml}
+                </div>
+              </div>
+            </label>`;
+        }).join('');
+        return `<div class="games-group-title">${group.label}</div><div class="game-grid">${rows}</div>`;
+      }).join('');
+    }
+
+    function toggleGame(idx, e) {
+      e.preventDefault();
+      const game = GAMES[idx];
+      if (!isCompatible(game.platform)) return;
+      if (checked.has(idx)) {
+        checked.delete(idx);
+      } else {
+        checked.add(idx);
+      }
+      const item = document.getElementById(`item-${idx}`);
+      const cb   = document.getElementById(`cb-${idx}`);
+      if (checked.has(idx)) {
+        item.classList.add('checked');
+        cb.textContent = '✓';
+      } else {
+        item.classList.remove('checked');
+        cb.textContent = '';
+      }
+      update();
+    }
+
+    function updateDimming() {
+      GAMES.forEach((game, idx) => {
+        const item = document.getElementById(`item-${idx}`);
+        if (!item) return;
+        if (!isCompatible(game.platform)) {
+          item.classList.add('dimmed');
+          if (checked.has(idx)) {
+            checked.delete(idx);
+            item.classList.remove('checked');
+            document.getElementById(`cb-${idx}`).textContent = '';
+          }
+        } else {
+          item.classList.remove('dimmed');
+        }
+      });
+    }
+
+    function selectAll() {
+      GAMES.forEach((game, idx) => {
+        if (!isCompatible(game.platform)) return;
+        checked.add(idx);
+        const item = document.getElementById(`item-${idx}`);
+        const cb   = document.getElementById(`cb-${idx}`);
+        if (item) item.classList.add('checked');
+        if (cb)   cb.textContent = '✓';
+      });
+      update();
+    }
+
+    function clearAll() {
+      checked.clear();
+      GAMES.forEach((_, idx) => {
+        const item = document.getElementById(`item-${idx}`);
+        const cb   = document.getElementById(`cb-${idx}`);
+        if (item) item.classList.remove('checked');
+        if (cb)   cb.textContent = '';
+      });
+      update();
+    }
+
+    function fmt(n) { return n.toLocaleString('en-GB') + ' GB'; }
+
+    function update() {
+      const usedGB = [...checked].reduce((sum, idx) => sum + GAMES[idx].size, 0);
+      const count  = checked.size;
+
+      document.getElementById('selected-count').textContent =
+        count === 1 ? '1 game selected' : `${count} games selected`;
+      document.getElementById('stat-used').textContent = fmt(usedGB);
+
+      if (!selectedConsole) {
+        document.getElementById('stat-total').textContent = '— GB';
+        document.getElementById('stat-free').textContent  = '— GB';
+        document.getElementById('lbl-used').textContent   = fmt(usedGB);
+        document.getElementById('lbl-free').textContent   = '— GB';
+        setBar(0, 0, 100);
+        setResult('neutral', '📊', 'Select a console to get started',
+          'Pick your console above, then tick any games you already have installed.');
+        return;
+      }
+
+      const freeAfterGTA = capacity - usedGB - GTA6_SIZE;
+      const totalNeeded  = usedGB + GTA6_SIZE;
+
+      document.getElementById('stat-total').textContent = fmt(capacity);
+      document.getElementById('stat-free').textContent  = freeAfterGTA >= 0 ? fmt(freeAfterGTA) : '-' + fmt(Math.abs(freeAfterGTA)).replace(' GB', '') + ' GB';
+      document.getElementById('lbl-used').textContent   = fmt(usedGB);
+      document.getElementById('lbl-free').textContent   = freeAfterGTA >= 0 ? fmt(freeAfterGTA) : '0 GB';
+
+      const usedPct = Math.min((usedGB / capacity) * 100, 100);
+      const gtaPct  = Math.min((GTA6_SIZE / capacity) * 100, 100 - usedPct);
+      const freePct = Math.max(100 - usedPct - gtaPct, 0);
+
+      setBar(usedPct, gtaPct, freePct);
+
+      if (freeAfterGTA >= 50) {
+        setResult('fits', '✅',
+          `GTA 6 fits with room to spare`,
+          `Your ${count > 0 ? count + ' installed games use ' + fmt(usedGB) + '. After GTA 6 you will have ' : 'empty console means you will have '}${fmt(freeAfterGTA)} free. You are all set for November 19.`);
+      } else if (freeAfterGTA >= 0) {
+        setResult('tight', '⚠️',
+          `GTA 6 fits — but it's tight`,
+          `You will only have ${fmt(freeAfterGTA)} free after installing GTA 6. Day-one patches and updates could use this up. Consider freeing more space or upgrading.`);
+      } else {
+        const shortBy = Math.abs(freeAfterGTA);
+        setResult('no-fit', '❌',
+          `GTA 6 will not fit`,
+          `You are ${fmt(shortBy)} short. You need to delete games or add more storage before pre-loading on November 10.`);
+      }
+    }
+
+    function setBar(usedPct, gtaPct, freePct) {
+      document.getElementById('bar-used').style.width = usedPct + '%';
+      document.getElementById('bar-gta').style.width  = gtaPct  + '%';
+      document.getElementById('bar-free').style.width = freePct + '%';
+    }
+
+    function setResult(type, icon, title, body) {
+      const panel = document.getElementById('result-panel');
+      panel.className = 'result-panel ' + (type === 'fits' ? 'fits' : type === 'tight' ? 'tight' : type === 'no-fit' ? 'no-fit' : 'fits');
+      document.getElementById('result-icon').textContent  = icon;
+      document.getElementById('result-title').textContent = title;
+      document.getElementById('result-body').textContent  = body;
+
+      const action = document.getElementById('result-action');
+      if (type === 'no-fit' || type === 'tight') {
+        action.innerHTML = `<a href="../index.html#ssds" class="btn btn-primary btn-sm" style="white-space:nowrap;">Fix it: View SSDs ↗</a>`;
+      } else {
+        action.innerHTML = '';
+      }
+    }
+
+    buildGamesList();
+    update();
+  </script>
+</body>
+</html>
