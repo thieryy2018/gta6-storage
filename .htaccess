@@ -4,6 +4,15 @@ RewriteEngine On
 RewriteCond %{HTTPS} off
 RewriteRule ^ https://%{HTTP_HOST}%{REQUEST_URI} [L,R=301]
 
-# www to non-www (optional — remove if you prefer www)
+# www to non-www
 RewriteCond %{HTTP_HOST} ^www\.(.*)$ [NC]
 RewriteRule ^ https://%1%{REQUEST_URI} [L,R=301]
+
+# 301 redirects for renamed pages (old URL -> new SEO URL)
+Redirect 301 /pages/ssds.html /pages/ssds-for-gta6.html
+Redirect 301 /pages/faq.html /pages/gta6-storage-faqs.html
+Redirect 301 /pages/install-guide.html /pages/gta6-ps5-install-guide.html
+Redirect 301 /pages/storage-calculator.html /pages/gta6-storage-calculator.html
+Redirect 301 /pages/ps5-storage.html /pages/gta6-ps5-storage.html
+Redirect 301 /pages/xbox-storage.html /pages/gta6-xbox-storage.html
+Redirect 301 /pages/pc-storage.html /pages/gta6-pc-storage.html
