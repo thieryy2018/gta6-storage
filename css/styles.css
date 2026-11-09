@@ -268,7 +268,7 @@ body {
 .product-price-row {
   display: flex;
   align-items: center;
-  justify-content: flex-end;
+  justify-content: center;
   gap: 12px;
   flex-wrap: wrap;
 }
