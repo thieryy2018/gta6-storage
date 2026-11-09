@@ -1,6 +1,10 @@
 {
   "cleanUrls": true,
   "trailingSlash": false,
+  "rewrites": [
+    { "source": "/gta-6-news", "destination": "/pages/gta-6-news/index.html" },
+    { "source": "/gta-6-news/gta-6-file-size", "destination": "/pages/gta-6-news/gta-6-file-size.html" }
+  ],
   "redirects": [
     { "source": "/index.html", "destination": "/", "permanent": true },
     { "source": "/pages/faq.html", "destination": "/pages/gta6-storage-faqs", "permanent": true },
@@ -9,6 +13,8 @@
     { "source": "/pages/ps5-storage.html", "destination": "/pages/gta6-ps5-storage", "permanent": true },
     { "source": "/pages/xbox-storage.html", "destination": "/pages/gta6-xbox-storage", "permanent": true },
     { "source": "/pages/pc-storage.html", "destination": "/pages/gta6-pc-storage", "permanent": true },
-    { "source": "/pages/storage-calculator.html", "destination": "/pages/gta6-storage-calculator", "permanent": true }
+    { "source": "/pages/storage-calculator.html", "destination": "/pages/gta6-storage-calculator", "permanent": true },
+    { "source": "/pages/gta-6-news/index.html", "destination": "/gta-6-news", "permanent": true },
+    { "source": "/pages/gta-6-news/gta-6-file-size.html", "destination": "/gta-6-news/gta-6-file-size", "permanent": true }
   ]
 }
