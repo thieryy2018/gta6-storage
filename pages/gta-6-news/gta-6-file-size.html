@@ -59,7 +59,15 @@
         "name": "How big is GTA 6?",
         "acceptedAnswer": {
           "@type": "Answer",
-          "text": "GTA 6 is approximately 210GB on PS5 as a base install. This figure may increase with day-one patches and future updates, so leave extra headroom."
+          "text": "GTA 6 is approximately 210GB on PS5 as a base install. This figure may increase with day-one patches and future updates, so leave extra headroom when preparing your storage."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "Has Rockstar officially confirmed the GTA 6 file size?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "Rockstar Games has not officially confirmed the exact file size. The 210GB figure comes from leaked pre-load data that has been widely reported. The actual install may differ slightly, and day-one patches will add to the total."
         }
       },
       {
@@ -72,10 +80,42 @@
       },
       {
         "@type": "Question",
+        "name": "Will GTA 6 fit on my PS5 without deleting anything?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "Only if you have at least 210GB of free space on your PS5. The PS5 has approximately 667GB of usable storage. If you have more than 457GB already installed, GTA 6 will not fit without deleting games or adding an M.2 SSD upgrade."
+        }
+      },
+      {
+        "@type": "Question",
         "name": "What happens if GTA 6 doesn't fit on my PS5?",
         "acceptedAnswer": {
           "@type": "Answer",
-          "text": "You will need to delete existing games to free up space, or add an M.2 SSD expansion drive to your PS5. An M.2 SSD upgrade gives you up to 2TB of additional storage and takes about 10 minutes to install."
+          "text": "You will need to delete existing games to free up space, or add an M.2 SSD expansion drive to your PS5. An M.2 SSD gives you up to 2TB of additional storage and takes about 10 minutes to install."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "Will GTA 6 fit on Xbox Series S?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "With difficulty. The Xbox Series S has only 364GB of usable storage. GTA 6 at 210GB would take up 58% of the entire console, leaving just 154GB for everything else. Most Series S owners will need to delete games or add a Seagate Storage Expansion Card before pre-loading starts."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "Is the GTA 6 file size bigger on Xbox than PS5?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "The file size on Xbox Series X|S has not been officially confirmed and may differ slightly from the PS5 figure. The Xbox version typically compresses assets differently. The 210GB figure currently cited relates to the PS5 version."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "Will GTA 6 get bigger over time?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "Almost certainly yes. The 210GB figure covers the base install. Day-one patches, story DLC, online content updates, and future expansions will push the total higher over time. Plan for 250GB or more in the long run."
         }
       }
     ]
@@ -89,33 +129,105 @@
   <link rel="stylesheet" href="../../css/styles.css">
 
   <style>
-    .article-img-placeholder {
+    /* Article layout */
+    .article-hero { padding: 48px 0 24px; }
+    .article-hero h1 {
+      font-family: 'Barlow Condensed', sans-serif;
+      font-weight: 900;
+      font-size: clamp(2rem, 5vw, 3rem);
+      color: var(--fg);
+      line-height: 1.1;
+      margin-bottom: 16px;
+    }
+    .article-body { max-width: 740px; margin: 0 auto; padding-bottom: 60px; }
+    .article-body h2 {
+      font-family: 'Barlow Condensed', sans-serif;
+      font-weight: 900;
+      font-size: 1.8rem;
+      margin: 40px 0 12px;
+      color: var(--fg);
+      border-bottom: 1px solid var(--border);
+      padding-bottom: 10px;
+    }
+    .article-body h3 { font-weight: 700; font-size: 1.05rem; margin: 24px 0 8px; color: var(--fg); }
+    .article-body p { color: var(--fg2); margin-bottom: 16px; line-height: 1.75; }
+    .article-body ul { color: var(--fg2); padding-left: 20px; margin-bottom: 16px; line-height: 1.75; }
+    .article-body li { margin-bottom: 6px; }
+    /* Scope link colour so it doesn't bleed into buttons */
+    .article-body a:not(.btn) { color: var(--accent); text-decoration: none; }
+    .article-body a:not(.btn):hover { text-decoration: underline; }
+
+    /* Meta / tag */
+    .article-meta { font-size: 0.82rem; color: var(--fg2); margin-bottom: 32px; display: flex; gap: 16px; flex-wrap: wrap; align-items: center; }
+    .article-tag {
+      background: rgba(255,45,120,0.1);
+      color: var(--accent);
+      font-size: 0.72rem;
+      font-weight: 700;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      padding: 3px 10px;
+      border-radius: 20px;
+    }
+
+    /* Image placeholder — styled, not broken */
+    .article-img {
       width: 100%;
-      height: 220px;
+      aspect-ratio: 16/7;
       background: var(--bg3);
       border-radius: var(--radius);
       border: 1px solid var(--border);
-      margin: 24px 0;
+      margin: 28px 0;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      gap: 10px;
+      color: var(--fg2);
+      font-size: 0.82rem;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      font-weight: 600;
     }
-    .article-body { max-width: 740px; margin: 0 auto; }
-    .article-body h2 { font-family: 'Barlow Condensed', sans-serif; font-weight: 900; font-size: 1.8rem; margin: 36px 0 12px; color: var(--fg); }
-    .article-body h3 { font-weight: 700; font-size: 1.1rem; margin: 24px 0 8px; }
-    .article-body p { color: var(--fg2); margin-bottom: 16px; line-height: 1.75; }
-    .article-body ul { color: var(--fg2); padding-left: 20px; margin-bottom: 16px; line-height: 1.75; }
-    .article-body a { color: var(--accent); }
-    .article-meta { font-size: 0.82rem; color: var(--fg2); margin-bottom: 32px; display: flex; gap: 16px; flex-wrap: wrap; }
-    .article-tag { background: rgba(245,197,24,0.1); color: var(--accent); font-size: 0.72rem; font-weight: 700; letter-spacing: 0.1em; text-transform: uppercase; padding: 3px 10px; border-radius: 20px; }
+    .article-img svg { opacity: 0.4; }
+    .article-img span { opacity: 0.5; }
+
+    /* Chart */
+    .chart-wrap { margin: 28px 0; overflow-x: auto; }
+
+    /* Product rec box */
     .product-rec { margin: 32px 0; }
-    .chart-wrap { margin: 32px 0; overflow-x: auto; }
-    .article-hero { padding: 48px 0 32px; }
-    .article-hero h1 { font-family: 'Barlow Condensed', sans-serif; font-weight: 900; font-size: clamp(1.8rem, 4vw, 2.8rem); color: var(--fg); line-height: 1.15; margin-bottom: 16px; }
-    .faq-section { margin: 48px 0 32px; padding: 32px; background: var(--bg2); border: 1px solid var(--border); border-radius: var(--radius); }
-    .faq-section h2 { font-family: 'Barlow Condensed', sans-serif; font-weight: 900; font-size: 1.5rem; color: var(--fg); margin-bottom: 20px; }
-    .faq-item { margin-bottom: 20px; }
-    .faq-item:last-child { margin-bottom: 0; }
-    .faq-item h3 { font-weight: 700; font-size: 1rem; color: var(--fg); margin-bottom: 6px; }
-    .faq-item p { color: var(--fg2); font-size: 0.9rem; line-height: 1.6; margin-bottom: 0; }
-    .article-nav-links { margin: 32px 0; padding-top: 24px; border-top: 1px solid var(--border); display: flex; gap: 24px; flex-wrap: wrap; font-size: 0.9rem; }
+
+    /* Article FAQ uses site .faq-list / details styles already in styles.css */
+    .article-faq { margin: 48px 0 32px; }
+    .article-faq-heading {
+      font-family: 'Barlow Condensed', sans-serif;
+      font-weight: 900;
+      font-size: 1.8rem;
+      margin-bottom: 20px;
+      color: var(--fg);
+    }
+    .faq-category-label {
+      font-size: 0.78rem;
+      color: var(--fg2);
+      margin-bottom: 10px;
+      margin-top: 24px;
+      font-weight: 600;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+    }
+    .faq-category-label:first-child { margin-top: 0; }
+
+    /* Bottom nav */
+    .article-nav-links {
+      margin: 40px 0 0;
+      padding-top: 24px;
+      border-top: 1px solid var(--border);
+      display: flex;
+      gap: 24px;
+      flex-wrap: wrap;
+      font-size: 0.9rem;
+    }
   </style>
 </head>
 <body>
@@ -147,149 +259,209 @@
     </div>
   </section>
 
-  <section>
-    <div class="container">
-      <div class="article-body">
+  <div class="container">
+    <div class="article-body">
 
-        <div class="article-img-placeholder" role="img" aria-label="PS5 console"></div>
-
-        <!-- Section 1: The headline figure -->
-        <h2>The Headline Figure: 210GB</h2>
-        <p>GTA 6 is shaping up to be approximately <strong>210GB on PS5</strong>. That's the base install — before day-one patches, before updates, before any additional content Rockstar pushes post-launch. Expect the real-world footprint to creep higher once you've actually downloaded everything on release day.</p>
-        <p>Rockstar hasn't officially confirmed the exact number, but leaked pre-load data points firmly to 210GB. Given the sheer scale of the game — a living, breathing recreation of a fictional Florida spanning cities, suburbs, and swampland — it's not surprising. What is surprising is just how much larger it is than anything that's come before it.</p>
-
-        <!-- Section 2: Comparison chart -->
-        <h2>How GTA 6 Stacks Up Against Other Massive Games</h2>
-        <p>To put 210GB in context, here's how GTA 6 compares to some of the biggest installs on current-gen consoles.</p>
-
-        <div class="chart-wrap" role="img" aria-label="Bar chart comparing game install sizes. GTA 6 at 210GB is the largest.">
-          <svg viewBox="0 0 600 320" xmlns="http://www.w3.org/2000/svg" style="width:100%;max-width:600px;display:block;font-family:'Inter',sans-serif;">
-            <title>GTA 6 vs Other Big Games — Install Size (GB)</title>
-            <text x="0" y="22" font-size="13" font-weight="600" fill="#e8eaf0">GTA 6 vs Other Big Games — Install Size (GB)</text>
-
-            <!-- Row height 36, start y=48 -->
-            <!-- Max bar width area: x=160 to x=560 = 400px, 210GB = full width -->
-
-            <!-- GTA 6: 210GB — accent colour -->
-            <text x="150" y="68" text-anchor="end" font-size="12" fill="#e8eaf0">GTA 6</text>
-            <rect x="155" y="52" width="400" height="24" rx="3" fill="#f5c518"/>
-            <text x="563" y="68" font-size="12" fill="#f5c518" font-weight="700">210 GB</text>
-
-            <!-- Call of Duty MW III: 102GB -->
-            <text x="150" y="116" text-anchor="end" font-size="12" fill="#e8eaf0">CoD: MW III</text>
-            <rect x="155" y="100" width="194" height="24" rx="3" fill="#1e2330"/>
-            <rect x="155" y="100" width="194" height="24" rx="3" fill="none" stroke="#3a3f52" stroke-width="1"/>
-            <text x="357" y="116" font-size="12" fill="#9ea3b8" dx="6">102 GB</text>
-
-            <!-- Red Dead Redemption 2: 105GB -->
-            <text x="150" y="164" text-anchor="end" font-size="12" fill="#e8eaf0">Red Dead 2</text>
-            <rect x="155" y="148" width="200" height="24" rx="3" fill="#1e2330"/>
-            <rect x="155" y="148" width="200" height="24" rx="3" fill="none" stroke="#3a3f52" stroke-width="1"/>
-            <text x="363" y="164" font-size="12" fill="#9ea3b8" dx="6">105 GB</text>
-
-            <!-- God of War Ragnarök: 90GB -->
-            <text x="150" y="212" text-anchor="end" font-size="12" fill="#e8eaf0">GoW: Ragnarök</text>
-            <rect x="155" y="196" width="171" height="24" rx="3" fill="#1e2330"/>
-            <rect x="155" y="196" width="171" height="24" rx="3" fill="none" stroke="#3a3f52" stroke-width="1"/>
-            <text x="334" y="212" font-size="12" fill="#9ea3b8" dx="6">90 GB</text>
-
-            <!-- The Last of Us Part I: 79GB -->
-            <text x="150" y="260" text-anchor="end" font-size="12" fill="#e8eaf0">The Last of Us I</text>
-            <rect x="155" y="244" width="150" height="24" rx="3" fill="#1e2330"/>
-            <rect x="155" y="244" width="150" height="24" rx="3" fill="none" stroke="#3a3f52" stroke-width="1"/>
-            <text x="313" y="260" font-size="12" fill="#9ea3b8" dx="6">79 GB</text>
-
-            <!-- Cyberpunk 2077: 70GB -->
-            <text x="150" y="308" text-anchor="end" font-size="12" fill="#e8eaf0">Cyberpunk 2077</text>
-            <rect x="155" y="292" width="133" height="24" rx="3" fill="#1e2330"/>
-            <rect x="155" y="292" width="133" height="24" rx="3" fill="none" stroke="#3a3f52" stroke-width="1"/>
-            <text x="296" y="308" font-size="12" fill="#9ea3b8" dx="6">70 GB</text>
-          </svg>
-        </div>
-
-        <p>GTA 6 is nearly double Red Dead Redemption 2 and more than twice Call of Duty: Modern Warfare III. If your console was full after those games, GTA 6 is going to cause real problems.</p>
-
-        <!-- Section 3: Per console breakdown -->
-        <h2>What This Means for Each Console</h2>
-
-        <h3>PS5 (667GB usable)</h3>
-        <p>GTA 6 eats up 31% of a completely empty PS5's usable storage, leaving you with 457GB. The catch? Almost nobody has an empty console. The average PS5 owner has 200–300GB of games installed. Add GTA 6 on top of that and you're looking at 90–120GB of headroom at best — barely enough for one or two more titles.</p>
-
-        <h3>Xbox Series X (802GB usable)</h3>
-        <p>The best-positioned current-gen console. After GTA 6 you'd have 592GB remaining on a fresh machine. Still not infinite, but Xbox Series X owners are in the least precarious position of anyone at launch.</p>
-
-        <h3>Xbox Series S (364GB usable)</h3>
-        <p>This is where things get genuinely rough. GTA 6 consumes 58% of the Xbox Series S's total usable storage, leaving just 154GB. On a console that was already tight on space, that's essentially no room for anything else. If you're on a Series S, you need to act now.</p>
-
-        <p><a href="/#checker">See our full console storage breakdown →</a></p>
-
-        <!-- Section 4: Will GTA 6 fit on your PS5? -->
-        <h2>Will GTA 6 Actually Fit on Your PS5?</h2>
-        <p>Simple maths: if you've already got more than 457GB installed on your PS5, GTA 6 won't fit without deleting something. Most PS5 owners will need to clear at least a few games before pre-loading begins.</p>
-        <p>The key date is <strong>12 November 2026</strong> — that's when pre-loading starts. You need your storage sorted before then. If you're waiting until 19 November to sort it out, you'll be watching the launch stream while your console slowly downloads, well behind everyone else.</p>
-        <p><a href="/#checker">Check exactly how much space you need →</a></p>
-
-        <div class="article-img-placeholder" role="img" aria-label="M.2 SSD close-up"></div>
-
-        <!-- Section 5: PS5 SSD upgrade -->
-        <h2>The Easiest Fix: PS5 SSD Upgrade</h2>
-        <p>Rather than playing an increasingly painful game of whack-a-mole deleting old games to make room, the proper solution is an M.2 SSD expansion drive. A 2TB M.2 SSD gives you enough space for GTA 6 and 15–20 more large games, and the installation takes around 10 minutes with a small Phillips screwdriver.</p>
-        <p><a href="/pages/gta6-ps5-install-guide">Read our step-by-step PS5 SSD install guide →</a></p>
-
-        <div class="product-rec">
-          <div class="product-card" style="max-width:420px;">
-            <div class="product-name">WD_BLACK SN850P 2TB</div>
-            <div class="product-desc" style="color:var(--fg2);font-size:0.88rem;margin:6px 0 4px;">Sony's officially licensed PS5 SSD. PCIe Gen 4, includes heatsink, plug-and-play compatible.</div>
-            <div class="product-price">~£185</div>
-            <a href="https://www.amazon.co.uk/s?k=WD+Black+SN850P+2TB+PS5&tag=paintbguide-21" class="btn btn-primary" target="_blank" rel="noopener sponsored" style="margin-top:12px;display:inline-block;">Buy on Amazon ↗</a>
-          </div>
-        </div>
-
-        <!-- Section 6: Xbox Series S -->
-        <h2>What About Xbox Series S?</h2>
-        <p>The Series S is the most affected console by far. With only 364GB usable, GTA 6 takes up more than half the available storage before you've installed a single other game. And unlike PS5, there's no cheap M.2 SSD fix — the Series S uses proprietary Seagate expansion cards that slot into a port on the back of the console. They're more expensive per gigabyte than M.2 drives, but they're the only option.</p>
-
-        <div class="product-rec">
-          <div class="product-card" style="max-width:420px;">
-            <div class="product-name">Seagate 2TB Xbox Storage Expansion Card</div>
-            <div class="product-desc" style="color:var(--fg2);font-size:0.88rem;margin:6px 0 4px;">Official Xbox-licensed storage. Plug into the expansion port — no tools, no faff. Doubles your Series S storage instantly.</div>
-            <div class="product-price">~£185</div>
-            <a href="https://www.amazon.co.uk/s?k=Seagate+Storage+Expansion+Card+2TB+Xbox&tag=paintbguide-21" class="btn btn-primary" target="_blank" rel="noopener sponsored" style="margin-top:12px;display:inline-block;">Buy on Amazon ↗</a>
-          </div>
-        </div>
-
-        <!-- Section 7: PC -->
-        <h2>What About the PC Version?</h2>
-        <p>There's no PC release confirmed for 19 November — GTA 6 is launching on PS5 and Xbox Series X|S only. When PC does eventually arrive, the file size could be different depending on texture quality settings and compression. PC M.2 SSDs are also significantly cheaper than PS5-specific drives, so storage won't be the headache it is on console.</p>
-
-        <!-- FAQ section -->
-        <div class="faq-section">
-          <h2>Quick Answers</h2>
-
-          <div class="faq-item">
-            <h3>How big is GTA 6?</h3>
-            <p>Approximately 210GB on PS5 as a base install. This may increase with day-one patches and future updates, so leave extra headroom.</p>
-          </div>
-
-          <div class="faq-item">
-            <h3>When does GTA 6 pre-loading start in the UK?</h3>
-            <p>Pre-loading starts on 12 November 2026 — one week before the 19 November launch. You need your storage upgrade installed before that date to start downloading straight away.</p>
-          </div>
-
-          <div class="faq-item">
-            <h3>What happens if GTA 6 doesn't fit on my PS5?</h3>
-            <p>You'll need to delete existing games to free up space, or add an M.2 SSD expansion drive to your PS5. The WD_BLACK SN850P 2TB is Sony's officially licensed option and takes about 10 minutes to install.</p>
-          </div>
-        </div>
-
-        <div class="article-nav-links">
-          <a href="/pages/gta-6-news">← Back to all guides</a>
-          <a href="/pages/gta6-storage-faqs">Read our full GTA 6 storage FAQ →</a>
-        </div>
-
+      <!-- Hero image placeholder -->
+      <div class="article-img" role="img" aria-label="PS5 console">
+        <svg width="48" height="48" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><rect x="2" y="3" width="20" height="14" rx="2"/><path d="M8 21h8M12 17v4"/></svg>
+        <span>PS5 Console — add image to /images/blog/ps5.jpg</span>
       </div>
+
+      <!-- Section 1 -->
+      <h2>The Headline Figure: 210GB</h2>
+      <p>GTA 6 is shaping up to be approximately <strong>210GB on PS5</strong>. That's the base install — before day-one patches, before updates, before any additional content Rockstar pushes post-launch. Expect the real-world footprint to creep higher once you've actually downloaded everything on release day. Plan for 250GB or more if you're thinking long-term.</p>
+      <p>Rockstar hasn't officially confirmed the exact number, but leaked pre-load data points firmly to 210GB. Given the sheer scale of the game — a living, breathing recreation of a fictional Florida spanning cities, suburbs, and swampland — it's not surprising. What is surprising is just how much larger it is than anything that's come before it.</p>
+
+      <!-- Section 2: comparison chart -->
+      <h2>How GTA 6 Compares to Other Massive Games</h2>
+      <p>To put 210GB in context, here's how GTA 6 stacks up against some of the largest installs on current-gen consoles.</p>
+
+      <div class="chart-wrap" role="img" aria-label="Horizontal bar chart: GTA 6 at 210GB is the largest game, nearly double Red Dead Redemption 2 at 105GB.">
+        <svg viewBox="0 0 620 300" xmlns="http://www.w3.org/2000/svg" style="width:100%;max-width:620px;display:block;font-family:'Inter',sans-serif;">
+          <title>GTA 6 vs Other Big Games — Install Size (GB)</title>
+          <!-- Chart title -->
+          <text x="0" y="20" font-size="12" font-weight="700" fill="#f0e8ff" letter-spacing="0.03em">GTA 6 VS OTHER BIG GAMES — INSTALL SIZE (GB)</text>
+
+          <!-- Bar area: label col 0–155, bars 160–540, value 545+ -->
+          <!-- Max bar = 210GB → 380px. Scale: px = (gb/210)*380 -->
+
+          <!-- GTA 6: 210GB → 380px — accent pink -->
+          <text x="152" y="58" text-anchor="end" font-size="12" fill="#f0e8ff" font-weight="600">GTA 6</text>
+          <rect x="158" y="42" width="380" height="22" rx="3" fill="#ff2d78"/>
+          <text x="546" y="57" font-size="12" fill="#ff2d78" font-weight="700">210 GB</text>
+
+          <!-- Red Dead 2: 105GB → 190px -->
+          <text x="152" y="100" text-anchor="end" font-size="12" fill="#f0e8ff">Red Dead 2</text>
+          <rect x="158" y="84" width="190" height="22" rx="3" fill="#2d1655"/>
+          <rect x="158" y="84" width="190" height="22" rx="3" fill="none" stroke="rgba(255,45,120,0.2)" stroke-width="1"/>
+          <text x="354" y="99" font-size="12" fill="#a890c8" dx="6">105 GB</text>
+
+          <!-- CoD MW III: 102GB → 184px -->
+          <text x="152" y="142" text-anchor="end" font-size="12" fill="#f0e8ff">CoD: MW III</text>
+          <rect x="158" y="126" width="184" height="22" rx="3" fill="#2d1655"/>
+          <rect x="158" y="126" width="184" height="22" rx="3" fill="none" stroke="rgba(255,45,120,0.2)" stroke-width="1"/>
+          <text x="348" y="141" font-size="12" fill="#a890c8" dx="6">102 GB</text>
+
+          <!-- God of War Ragnarök: 90GB → 163px -->
+          <text x="152" y="184" text-anchor="end" font-size="12" fill="#f0e8ff">GoW: Ragnarök</text>
+          <rect x="158" y="168" width="163" height="22" rx="3" fill="#2d1655"/>
+          <rect x="158" y="168" width="163" height="22" rx="3" fill="none" stroke="rgba(255,45,120,0.2)" stroke-width="1"/>
+          <text x="327" y="183" font-size="12" fill="#a890c8" dx="6">90 GB</text>
+
+          <!-- The Last of Us Part I: 79GB → 143px -->
+          <text x="152" y="226" text-anchor="end" font-size="12" fill="#f0e8ff">Last of Us I</text>
+          <rect x="158" y="210" width="143" height="22" rx="3" fill="#2d1655"/>
+          <rect x="158" y="210" width="143" height="22" rx="3" fill="none" stroke="rgba(255,45,120,0.2)" stroke-width="1"/>
+          <text x="307" y="225" font-size="12" fill="#a890c8" dx="6">79 GB</text>
+
+          <!-- Cyberpunk 2077: 70GB → 127px -->
+          <text x="152" y="268" text-anchor="end" font-size="12" fill="#f0e8ff">Cyberpunk 2077</text>
+          <rect x="158" y="252" width="127" height="22" rx="3" fill="#2d1655"/>
+          <rect x="158" y="252" width="127" height="22" rx="3" fill="none" stroke="rgba(255,45,120,0.2)" stroke-width="1"/>
+          <text x="291" y="267" font-size="12" fill="#a890c8" dx="6">70 GB</text>
+        </svg>
+      </div>
+
+      <p>GTA 6 is nearly double Red Dead Redemption 2 and more than twice the size of Call of Duty: Modern Warfare III. If your console was full after those games, GTA 6 is going to cause real problems.</p>
+
+      <!-- Section 3: per console -->
+      <h2>What This Means for Each Console</h2>
+
+      <h3>PS5 (667GB usable)</h3>
+      <p>GTA 6 eats 31% of a completely empty PS5's usable storage, leaving 457GB. The catch? Almost nobody has an empty console. The average PS5 owner has 200–300GB of games installed. Add GTA 6 on top and you're looking at 90–120GB of headroom at best — barely enough for one or two more titles.</p>
+
+      <h3>Xbox Series X (802GB usable)</h3>
+      <p>The best-positioned current-gen console. After installing GTA 6 you'd have 592GB remaining on a fresh machine. Xbox Series X owners are in the least precarious position at launch, though that buffer will erode quickly as more Series X titles ship.</p>
+
+      <h3>Xbox Series S (364GB usable)</h3>
+      <p>This is where things get genuinely rough. GTA 6 consumes 58% of the Xbox Series S's total usable storage, leaving just 154GB. On a console that was already tight on space, that's essentially no room for anything else. If you're on a Series S, the time to act is now — not 18 November.</p>
+
+      <p><a href="/#checker">See our full console storage breakdown →</a></p>
+
+      <!-- SSD image placeholder -->
+      <div class="article-img" role="img" aria-label="M.2 SSD close-up">
+        <svg width="48" height="48" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><rect x="2" y="8" width="20" height="8" rx="2"/><path d="M6 8V6M10 8V6M14 8V6M18 8V6"/><circle cx="17" cy="12" r="1"/></svg>
+        <span>M.2 SSD — add image to /images/blog/m2-ssd.jpg</span>
+      </div>
+
+      <!-- Section 4: will it fit -->
+      <h2>Will GTA 6 Actually Fit on Your PS5?</h2>
+      <p>Simple maths: if you've already got more than 457GB installed, GTA 6 won't fit without deleting something. Most PS5 owners will need to clear at least a few games before pre-loading kicks off.</p>
+      <p>The key date is <strong>12 November 2026</strong> — that's when pre-loading starts. You need your storage sorted before then. Waiting until 19 November means watching the launch whilst your console slowly downloads, well behind everyone else.</p>
+      <p><a href="/#checker">Check exactly how much space you need →</a></p>
+
+      <!-- Section 5: PS5 SSD upgrade -->
+      <h2>The Easiest Fix: PS5 SSD Upgrade</h2>
+      <p>Rather than playing an increasingly painful game of whack-a-mole deleting old games, the proper solution is an M.2 SSD expansion drive. A 2TB M.2 SSD gives you space for GTA 6 and 15–20 more large games, and installation takes around 10 minutes with a small Phillips screwdriver.</p>
+      <p><a href="/pages/gta6-ps5-install-guide">Read our step-by-step PS5 SSD install guide →</a></p>
+
+      <div class="product-rec">
+        <div class="product-card top-pick" style="max-width:460px;">
+          <div class="top-pick-badge">★ Top Pick for GTA 6</div>
+          <div class="product-brand">WD_BLACK</div>
+          <div class="product-name">SN850P 2TB — Officially Licensed for PS5</div>
+          <div class="product-specs" style="margin-top:10px;">
+            <span class="spec-chip highlight">PS5 Licensed</span>
+            <span class="spec-chip">2TB</span>
+            <span class="spec-chip">7,300MB/s read</span>
+            <span class="spec-chip">Heatsink included</span>
+          </div>
+          <p class="product-why">The only SSD officially licensed by Sony for PS5. Shaped heatsink fits the PS5 bay precisely — zero guesswork, guaranteed compatibility. Stores GTA 6 and 8+ other large games.</p>
+          <div class="product-price-row">
+            <a href="https://www.amazon.co.uk/s?k=WD+Black+SN850P+2TB+PS5&tag=paintbguide-21" target="_blank" rel="noopener sponsored" class="btn btn-primary btn-sm btn-buy">Check Price on Amazon ↗</a>
+          </div>
+          <p class="affiliate-note">Affiliate link — we may earn a small commission at no extra cost to you.</p>
+        </div>
+      </div>
+
+      <!-- Section 6: Xbox Series S -->
+      <h2>What About Xbox Series S?</h2>
+      <p>The Series S is the most affected console by far. With only 364GB usable, GTA 6 takes up more than half the available storage before you've installed a single other game. And unlike PS5, there's no cheap M.2 fix — the Series S uses proprietary Seagate expansion cards that slot into a port on the back. They're more expensive per gigabyte than M.2 drives, but they're the only option for adding playable storage.</p>
+
+      <div class="product-rec">
+        <div class="product-card top-pick" style="max-width:460px;">
+          <div class="top-pick-badge">★ Top Pick for Series S</div>
+          <div class="product-brand">Seagate</div>
+          <div class="product-name">2TB Xbox Storage Expansion Card</div>
+          <div class="product-specs" style="margin-top:10px;">
+            <span class="spec-chip highlight">Xbox Licensed</span>
+            <span class="spec-chip">2TB</span>
+            <span class="spec-chip">Plug-in, no tools</span>
+            <span class="spec-chip">Full NVMe speed</span>
+          </div>
+          <p class="product-why">Official Xbox-licensed storage. Plugs into the expansion port on the back of Series S or Series X — no screwdrivers, no faff. Doubles your Series S storage instantly.</p>
+          <div class="product-price-row">
+            <a href="https://www.amazon.co.uk/s?k=Seagate+Storage+Expansion+Card+2TB+Xbox&tag=paintbguide-21" target="_blank" rel="noopener sponsored" class="btn btn-primary btn-sm btn-buy">Check Price on Amazon ↗</a>
+          </div>
+          <p class="affiliate-note">Affiliate link — we may earn a small commission at no extra cost to you.</p>
+        </div>
+      </div>
+
+      <!-- Section 7: PC -->
+      <h2>What About the PC Version?</h2>
+      <p>There's no PC release confirmed for 19 November — GTA 6 is launching on PS5 and Xbox Series X|S only. When PC does eventually arrive, the file size could differ depending on texture pack choices. PC M.2 SSDs are significantly cheaper than PS5-specific drives too, so storage will be less of a headache when it lands on PC.</p>
+
+      <!-- FAQ Section -->
+      <div class="article-faq">
+        <h2 class="article-faq-heading">GTA 6 File Size — Frequently Asked Questions</h2>
+
+        <p class="faq-category-label">The Basics</p>
+        <div class="faq-list">
+          <details open>
+            <summary>How big is GTA 6?</summary>
+            <p class="faq-body">GTA 6 is approximately <strong>210GB on PS5</strong> as a base install. This figure may increase with day-one patches and future updates — plan for 250GB or more in the long run.</p>
+          </details>
+          <details>
+            <summary>Has Rockstar officially confirmed the GTA 6 file size?</summary>
+            <p class="faq-body">No. Rockstar Games has not officially confirmed the exact file size. The 210GB figure comes from leaked pre-load data that has been widely reported across the games press. The actual install may differ slightly, and day-one patches will add to the total.</p>
+          </details>
+          <details>
+            <summary>Will GTA 6 get bigger over time?</summary>
+            <p class="faq-body">Almost certainly. The 210GB figure covers the base install only. Day-one patches, online content updates, story DLC, and future expansions will push the total higher over time. If you're buying storage specifically for GTA 6, plan for 250GB minimum.</p>
+          </details>
+          <details>
+            <summary>Is the GTA 6 file size the same on Xbox as on PS5?</summary>
+            <p class="faq-body">The Xbox Series X|S file size hasn't been officially confirmed and may differ slightly. The Xbox version typically compresses assets differently to PS5. The 210GB figure currently cited relates to the PS5 version.</p>
+          </details>
+        </div>
+
+        <p class="faq-category-label">PS5 Storage</p>
+        <div class="faq-list">
+          <details>
+            <summary>Will GTA 6 fit on my PS5 without deleting anything?</summary>
+            <p class="faq-body">Only if you have at least 210GB of free space. The PS5 has approximately <strong>667GB of usable storage</strong>. If you have more than 457GB already installed, GTA 6 won't fit without deleting games or adding an M.2 SSD upgrade. <a href="/#checker">Use our storage checker →</a></p>
+          </details>
+          <details>
+            <summary>When does GTA 6 pre-loading start in the UK?</summary>
+            <p class="faq-body">Pre-loading starts on <strong>12 November 2026</strong>, one week before the 19 November launch. You need your storage sorted and any upgrade installed before that date to start downloading straight away.</p>
+          </details>
+          <details>
+            <summary>What do I do if GTA 6 doesn't fit on my PS5?</summary>
+            <p class="faq-body">You have two options: delete games to free up space, or add an <strong>M.2 SSD expansion drive</strong>. The M.2 upgrade is the cleaner fix — a 2TB drive gives you space for GTA 6 and 15–20 more large games, and takes about 10 minutes to install. <a href="/pages/gta6-ps5-install-guide">See our full install guide →</a></p>
+          </details>
+        </div>
+
+        <p class="faq-category-label">Xbox Storage</p>
+        <div class="faq-list">
+          <details>
+            <summary>Will GTA 6 fit on Xbox Series S?</summary>
+            <p class="faq-body">With difficulty. The Xbox Series S has only <strong>364GB of usable storage</strong>. GTA 6 at 210GB takes up 58% of the entire console, leaving just 154GB for everything else. Most Series S owners will need to delete games or add a Seagate Storage Expansion Card before pre-loading.</p>
+          </details>
+          <details>
+            <summary>Can Xbox Series S use an M.2 SSD like PS5?</summary>
+            <p class="faq-body">No. Xbox Series X|S uses a <strong>proprietary Seagate expansion card</strong> that plugs into a dedicated port on the back. Standard M.2 SSDs do not work. The expansion card is more expensive per gigabyte than a PS5 M.2 drive, but it's the only way to add playable storage to a Series S.</p>
+          </details>
+        </div>
+      </div>
+
+      <div class="article-nav-links">
+        <a href="/pages/gta-6-news">← Back to all guides</a>
+        <a href="/pages/gta6-storage-faqs">Read our full GTA 6 storage FAQ →</a>
+      </div>
+
     </div>
-  </section>
+  </div>
 
   <footer class="site-footer">
     <div class="container footer-inner">
